@@ -1,0 +1,36 @@
+from random import choice
+import tock
+from time import sleep
+
+def random_player(obs, info):
+    """
+    defines a random player: returns a random action from the actionspace
+    """
+    action = choice(info['space'])
+    return action
+
+
+def eager_player(obs, info):
+    
+
+# create an instance of the game with 6 players
+env = tock.make(nplayers=2, render=True)
+
+# reset the game
+obs, rew, done, info = env.reset()
+
+while True:
+    # get an action from the random player
+    action = random_player(obs, info)
+
+    # pass the action and get the new gamestate
+    obs, rew, done, info = env.step(action)
+    print('info', info)
+
+    # render for graphical representation of gamestate
+    # sleep(30)0+0+
+    env.render()
+
+    # quit if game is finished
+    if done:
+        break
